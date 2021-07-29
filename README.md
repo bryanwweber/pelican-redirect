@@ -1,8 +1,9 @@
 Pelican Redirect: A Plugin for Pelican
 ====================================================
 
-[![Build Status](https://img.shields.io/github/workflow/status/pelican-plugins/pelican-redirect/build)](https://github.com/bryanwweber/pelican-redirect/actions)
+[![build](https://github.com/bryanwweber/pelican-redirect/actions/workflows/main.yml/badge.svg)](https://github.com/bryanwweber/pelican-redirect/actions/workflows/main.yml)
 [![PyPI Version](https://img.shields.io/pypi/v/pelican-redirect)](https://pypi.org/project/pelican-redirect/)
+![Python Versions](https://img.shields.io/pypi/pyversions/pelican-redirect)
 ![License](https://img.shields.io/pypi/l/pelican-redirect?color=blue)
 
 Redirect pages using meta http-equiv tags
