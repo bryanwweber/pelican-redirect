@@ -12,7 +12,9 @@ Installation
 
 This plugin can be installed via:
 
-    python -m pip install pelican-redirect
+```shell
+python -m pip install pelican-redirect
+```
 
 Usage
 -----
