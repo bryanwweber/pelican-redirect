@@ -17,7 +17,16 @@ This plugin can be installed via:
 Usage
 -----
 
-How to use this plugin
+Once this plugin is installed, you can add a key to the frontmatter of the file called `original_url`. The plugin will generate an HTML page at that location that redirects to the new location of the post/page. Example:
+
+```markdown
+Title: A sample title
+original_url: blog-posts/2021/07/21/a-sample-title.html
+
+Content here
+```
+
+Assuming this file is now going to be served from `blog-posts/a-simple-title.html`, a file will be written to `blog-posts/2021/07/21/a-sample-title.html` that redirects to the new URL.s
 
 Contributing
 ------------
