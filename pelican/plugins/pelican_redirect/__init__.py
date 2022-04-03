@@ -1,7 +1,10 @@
 import logging
 
-from pelican import signals
-from pelican.generators import CachingGenerator
+from dataclasses import dataclass
+from typing import Dict
+
+from pelican import signals, contents
+from pelican.generators import ArticlesGenerator, CachingGenerator, PagesGenerator
 
 logger = logging.getLogger(__name__)
 
@@ -25,6 +28,12 @@ TEMPLATE = """\
 """
 
 
+@dataclass
+class Redirect:
+    to: contents.Content
+    from_url: str
+
+
 class RedirectGenerator(CachingGenerator):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -33,30 +42,38 @@ class RedirectGenerator(CachingGenerator):
         signals.page_generator_finalized.connect(self.redirect_pages)
         self._templates["redirect"] = self.env.from_string(TEMPLATE)
 
-    def redirect_articles(self, article_generator):
+    def redirect_articles(self, article_generator: ArticlesGenerator):
         for article in article_generator.articles:
-            if article.metadata.get("original_url"):
-                self.redirects.append(article)
+            for url in self.redirected_urls(article_generator, article, kind="ARTICLE"):
+                self.redirects.append(Redirect(to=article, from_url=url))
 
-    def redirect_pages(self, page_generator):
+    def redirect_pages(self, page_generator: PagesGenerator):
         for page in page_generator.pages:
-            if page.metadata.get("original_url"):
-                self.redirects.append(page)
+            for url in self.redirected_urls(page_generator, page, kind="PAGE"):
+                self.redirects.append(Redirect(to=page, from_url=url))
 
-    def generate_output(self, writer):
-        for page in self.redirects:
+    def redirected_urls(self, generator: CachingGenerator, page, kind):
+        for formats in generator.settings.get("CONTENT_REDIRECT_CONFIGURATION", []):
+            if f"{kind}_URL" in formats:
+                yield formats[f"{kind}_URL"].format(**page.url_format)
+
+        if page.metadata.get("original_url"):
+            yield page.metadata.get("original_url")
+
+    def generate_output(self, writer) -> None:
+        for redirector in self.redirects:
             logger.debug(
                 "\nSource Path: %s\nRedirect File: %s",
-                page.source_path,
-                page.metadata["original_url"],
+                redirector.to,
+                redirector.from_url,
             )
             writer.write_file(
-                page.metadata["original_url"],
+                redirector.from_url,
                 self.get_template("redirect"),
                 self.context,
                 self.settings["RELATIVE_URLS"],
                 paginated=False,
-                page=page,
+                page=redirector.to,
             )
 
 
