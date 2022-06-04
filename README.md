@@ -28,7 +28,7 @@ Content here
 
 Assuming this file is now going to be served from `blog-posts/a-simple-title.html`, a file will be written to `blog-posts/2021/07/21/a-sample-title.html` that redirects to the new URL.
 
-If `original_url` does not have a file extension, then a directory will be created containing an index.html to facilitate the redirect.
+If `original_url` does not have a file extension, then `original_url` is assumed to be a directory and `index.html` is appended to the URL.
 
 ## Bulk Usage
 
