@@ -1,6 +1,7 @@
 import logging
 import os
 
+from dataclasses import dataclass
 from typing import Dict
 
 from pelican import signals, contents
@@ -28,13 +29,14 @@ TEMPLATE = """\
 """
 
 
+@dataclass
 class Redirect:
-    def __init__(self, to: contents.Content, from_url: str):
-        self.to = to
-        if from_url[-1] == '/' or os.path.splitext(from_url)[-1] == '':
-            self.from_url = from_url + ('' if from_url[-1] == '/' else '/') + 'index.html'
-        else:
-            self.from_url = from_url
+    to: contents.Content
+    from_url: str
+
+    def __post_init__(self):
+        if not self.from_url.lower().endswith((".htm", ".html")):
+            self.from_url = self.from_url.rstrip("/") + "/index.html"
 
 
 class RedirectGenerator(CachingGenerator):
