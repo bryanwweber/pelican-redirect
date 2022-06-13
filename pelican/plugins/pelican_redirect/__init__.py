@@ -1,4 +1,5 @@
 import logging
+import os
 
 from dataclasses import dataclass
 from typing import Dict
@@ -32,6 +33,10 @@ TEMPLATE = """\
 class Redirect:
     to: contents.Content
     from_url: str
+
+    def __post_init__(self):
+        if not self.from_url.lower().endswith((".htm", ".html")):
+            self.from_url = self.from_url.rstrip("/") + "/index.html"
 
 
 class RedirectGenerator(CachingGenerator):

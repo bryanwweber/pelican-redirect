@@ -26,7 +26,9 @@ original_url: blog-posts/2021/07/21/a-sample-title.html
 Content here
 ```
 
-Assuming this file is now going to be served from `blog-posts/a-simple-title.html`, a file will be written to `blog-posts/2021/07/21/a-sample-title.html` that redirects to the new URL.s
+Assuming this file is now going to be served from `blog-posts/a-simple-title.html`, a file will be written to `blog-posts/2021/07/21/a-sample-title.html` that redirects to the new URL.
+
+If `original_url` does not have a file extension, or the file extension is something other than `.htm` or `.html`, then `original_url` is assumed to be a directory and `index.html` is appended to the URL.
 
 ## Bulk Usage
 
