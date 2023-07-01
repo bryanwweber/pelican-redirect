@@ -15,6 +15,11 @@ This plugin can be installed via:
 python -m pip install pelican-redirect
 ```
 
+After the plugin is installed via pip, add `pelican_redirect` to your `PLUGINS` list in pelicanconf.py
+```shell
+PLUGINS = ['pelican_redirect', ...]
+```
+
 ## Usage
 
 Once this plugin is installed, you can add a key to the frontmatter of the file called `original_url`. The plugin will generate an HTML page at that location that redirects to the new location of the post/page. Example:
