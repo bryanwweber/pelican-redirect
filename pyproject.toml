@@ -24,7 +24,7 @@ dependencies = [
     "pelican >=4.5",
 ]
 license = {text = "BSD-3-Clause"}
-version = "2.0.0"
+dynamic = ["version"]
 
 [project.urls]
 Homepage = "https://github.com/bryanwweber/pelican-redirect"
@@ -38,11 +38,18 @@ exclude = [
   "/changelog.d/*.rst",
   "/.github",
 ]
+
 [tool.hatch.build.targets.wheel]
 packages = [
   "pelican",
 ]
 include-only = ["pelican/plugins/pelican_redirect"]
+
+[tool.hatch.version]
+source = "vcs"
+
+[tool.hatch.build.hooks.vcs]
+version-file = "pelican/plugins/pelican_redirect/_version.py"
 
 [build-system]
 requires = ["hatchling", "hatch-vcs"]
@@ -52,5 +59,6 @@ build-backend = "hatchling.build"
 dev = [
     "pytest~=7.4",
     "pytest-cov~=2.12",
+    "pytest-xdist>=3.5.0",
     "ruff>=0.11.7",
 ]

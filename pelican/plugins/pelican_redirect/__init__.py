@@ -1,10 +1,8 @@
 import logging
-import os
-
 from dataclasses import dataclass
-from typing import Dict
+from functools import cached_property
 
-from pelican import signals, contents
+from pelican import contents, signals
 from pelican.generators import ArticlesGenerator, CachingGenerator, PagesGenerator
 
 logger = logging.getLogger(__name__)
@@ -18,6 +16,7 @@ TEMPLATE = """\
     <link rel="canonical" href="/{{ page.save_as }}" />
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <meta http-equiv="refresh" content="0;url=/{{ page.save_as }}" />
+    <meta name="pelican-redirect-plugin-version" content="{{ version }}" />
 </head>
 
 <body>
@@ -40,8 +39,9 @@ class Redirect:
 
 
 class RedirectGenerator(CachingGenerator):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
+    def __init__(self, context, *args, **kwargs):
+        context["version"] = self.version
+        super().__init__(context, *args, **kwargs)
         self.redirects = []
         signals.article_generator_finalized.connect(self.redirect_articles)
         signals.page_generator_finalized.connect(self.redirect_pages)
@@ -64,6 +64,15 @@ class RedirectGenerator(CachingGenerator):
 
         if page.metadata.get("original_url"):
             yield page.metadata.get("original_url")
+
+    @cached_property
+    def version(self):
+        try:
+            from . import _version
+
+            return _version.__version__
+        except ImportError:
+            return "unknown"
 
     def generate_output(self, writer) -> None:
         for redirector in self.redirects:
