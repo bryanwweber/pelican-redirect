@@ -54,7 +54,6 @@ jobs:
     environment: Deployment
     needs: [test, lint]
     runs-on: ubuntu-latest
-    if: github.ref=='refs/heads/main' && github.event_name!='pull_request'
 
     permissions:
       contents: write
@@ -72,7 +71,8 @@ jobs:
           uvx --with 'autopub[github]' autopub check
 
       - name: Publish
-        if: ${{ steps.check_release.outputs.autopub_release=='true' }}
+        if: ${{ steps.check_release.outputs.autopub_release=='true' && github.ref=='refs/heads/main' && github.event_name!='pull_request' }}
+
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
