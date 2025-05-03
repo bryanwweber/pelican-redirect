@@ -1,6 +1,7 @@
 from pathlib import Path
 
 import pytest
+
 from pelican.contents import Page
 
 
