@@ -1,13 +1,9 @@
 name: build
-
 on: [push, pull_request]
-
 env:
   PYTEST_ADDOPTS: "--color=yes"
-
 permissions:
   contents: read
-
 jobs:
   test:
     name: Test - Python ${{ matrix.python-version }}
@@ -17,39 +13,31 @@ jobs:
         # while at this time 3.9 is still in security support,
         # it won't be soon. Let's cut that off here.
         python-version: ["3.10", "3.11", "3.12", "3.13"]
-
     steps:
       - uses: actions/checkout@v4
         with:
           persist-credentials: false
-
       - name: Install uv
-        uses: astral-sh/setup-uv@v6
+        uses: astral-sh/setup-uv@6b9c6063abd6010835644d4c2e1bef4cf5cd0fca # v6.0.1
         with:
           python-version: ${{ matrix.python-version }}
-
       - name: Run tests
         run: uv run pytest
-
   lint:
     name: Lint
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v4
         with:
           persist-credentials: false
-
       - name: Validate links in Markdown files
-        uses: JustinBeckwith/linkinator-action@v1
+        uses: JustinBeckwith/linkinator-action@3d5ba091319fa7b0ac14703761eebb7d100e6f6d # v1.11.0
         with:
           retry: true
-
-      - name: Install uv
-        uses: astral-sh/setup-uv@v6
-
-      - name: Run linters
-        run: uv run ruff check --output-format github
-
-      - name: Check format
-        run: uv run ruff format --check --diff
+      - name: Install mise
+        uses: jdx/mise-action@7a111ead46986ccad89a74ad013ba2a7c08c9e67 # v2.2.1
+        with:
+          install: true
+          cache: true
+      - name: Run linting
+        run: mise run lint
