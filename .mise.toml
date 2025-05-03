@@ -1,0 +1,18 @@
+[tools]
+cargo-binstall = "latest"
+"cargo:taplo-cli" = "latest"
+"pipx:zizmor" = "latest"
+uv = "latest"
+yamlfmt = "latest"
+
+[tasks]
+format = { depends = ["ruff-format", "taplo-format", "yamlfmt-format"] }
+lint = { depends = ["ruff-lint", "taplo-lint", "yamlfmt-lint", "zizmor-lint"] }
+ruff-format = { tools = { uv = "latest" }, run = "uv run ruff format . && uv run ruff check --fix ." }
+ruff-lint = { tools = { uv = "latest" }, run = "uv run ruff format --check . && uv run ruff check ." }
+taplo-format = { tools = { "cargo:taplo-cli" = "latest" }, run = "taplo format" }
+taplo-lint = { tools = { "cargo:taplo-cli" = "latest" }, run = "taplo format --check && taplo lint" }
+yamlfmt-format = { tools = { "yamlfmt" = "latest" }, run = "yamlfmt -quiet ." }
+yamlfmt-lint = { tools = { "yamlfmt" = "latest" }, run = "yamlfmt -lint -quiet ." }
+zizmor-lint = { tools = { "pipx:zizmor" = "latest" }, run = "zizmor .github/workflows --gh-token $(gh auth token)" }
+test = { tools = { uv = "latest" }, run = "uv run pytest" }
