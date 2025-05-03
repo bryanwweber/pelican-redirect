@@ -1,4 +1,5 @@
 name: Build & maybe upload PyPI package
+
 on:
   push:
     branches: [main]
@@ -7,15 +8,19 @@ on:
       - published
   pull_request:
   workflow_dispatch:
+
 concurrency:
   group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
   cancel-in-progress: true
+
 permissions:
   contents: read
+
 env:
   FORCE_COLOR: "1" # Make tools pretty.
   PIP_DISABLE_PIP_VERSION_CHECK: "1"
   PIP_NO_PYTHON_VERSION_WARNING: "1"
+
 jobs:
   # Always build & lint package.
   build-package:
