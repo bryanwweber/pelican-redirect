@@ -142,3 +142,5 @@ cython_debug/
 
 # VS Code settings
 .vscode/
+
+pelican/plugins/pelican_redirect/_version.py
