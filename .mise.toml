@@ -6,6 +6,7 @@ uv = "latest"
 yamlfmt = "latest"
 
 [tasks]
+ci = { depends = ["ruff-lint", "taplo-lint", "yamlfmt-lint"] }
 format = { depends = ["ruff-format", "taplo-format", "yamlfmt-format"] }
 lint = { depends = ["ruff-lint", "taplo-lint", "yamlfmt-lint", "zizmor-lint"] }
 ruff-format = { tools = { uv = "latest" }, run = "uv run ruff format . && uv run ruff check --fix ." }

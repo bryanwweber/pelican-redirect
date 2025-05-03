@@ -48,4 +48,4 @@ jobs:
           install: true
           cache: true
       - name: Run linting
-        run: mise run lint
+        run: mise run ci
