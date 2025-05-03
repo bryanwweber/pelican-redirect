@@ -12,7 +12,7 @@ ruff-format = { tools = { uv = "latest" }, run = "uv run ruff format . && uv run
 ruff-lint = { tools = { uv = "latest" }, run = "uv run ruff format --check . && uv run ruff check ." }
 taplo-format = { tools = { "cargo:taplo-cli" = "latest" }, run = "taplo format" }
 taplo-lint = { tools = { "cargo:taplo-cli" = "latest" }, run = "taplo format --check && taplo lint" }
+test = { tools = { uv = "latest" }, run = "uv run pytest" }
 yamlfmt-format = { tools = { "yamlfmt" = "latest" }, run = "yamlfmt -quiet ." }
 yamlfmt-lint = { tools = { "yamlfmt" = "latest" }, run = "yamlfmt -lint -quiet ." }
 zizmor-lint = { tools = { "pipx:zizmor" = "latest" }, run = "zizmor .github/workflows --gh-token $(gh auth token)" }
-test = { tools = { uv = "latest" }, run = "uv run pytest" }
