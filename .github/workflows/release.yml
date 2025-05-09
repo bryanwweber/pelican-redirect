@@ -40,6 +40,7 @@ jobs:
     permissions:
       contents: read
       id-token: write
+    if: github.repository_owner == 'bryanwweber' && github.event_name == 'push' && github.ref == 'refs/heads/main'
     name: Publish in-dev package to test.pypi.org
     environment: release-test-pypi
     runs-on: ubuntu-latest
@@ -73,3 +74,5 @@ jobs:
           path: dist
       - name: Upload package to PyPI
         uses: pypa/gh-action-pypi-publish@76f52bc884231f62b9a034ebfe128415bbaabdfc # v1.12.4
+        with:
+          verbose: true
