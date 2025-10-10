@@ -91,7 +91,9 @@ def test_plugin_redirect_to_existing(generator, writer, output_dir: Path, page: 
     assert f'content="0;url=/{page.url}"' in redirect_content
 
 
-def test_custom_article_url_respected(settings, writer, output_dir: Path, tmp_path: Path):
+def test_custom_article_url_respected(
+    settings, writer, output_dir: Path, tmp_path: Path
+):
     """Test that custom ARTICLE_URL settings are respected in redirects"""
     from pelican.plugins.pelican_redirect import Redirect, RedirectGenerator
 
@@ -118,5 +120,6 @@ def test_custom_article_url_respected(settings, writer, output_dir: Path, tmp_pa
     redirect_content = (output_dir / "old-location" / "article.html").read_text()
 
     # The redirect should use page.url (blog/test-article/), not page.save_as (test-article/index.html)
-    assert 'url=/blog/test-article/"' in redirect_content, \
+    assert 'url=/blog/test-article/"' in redirect_content, (
         f"Expected redirect to use page.url (blog/test-article/), but got: {redirect_content}"
+    )
