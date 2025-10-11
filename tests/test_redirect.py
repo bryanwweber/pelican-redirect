@@ -119,7 +119,8 @@ def test_custom_article_url_respected(
 
     redirect_content = (output_dir / "old-location" / "article.html").read_text()
 
-    # The redirect should use page.url (blog/test-article/), not page.save_as (test-article/index.html)
+    # Should use page.url (blog/test-article/),
+    # not page.save_as (test-article/index.html)
     assert 'url=/blog/test-article/"' in redirect_content, (
-        f"Expected redirect to use page.url (blog/test-article/), but got: {redirect_content}"
+        f"Expected page.url (blog/test-article/), got: {redirect_content}"
     )
