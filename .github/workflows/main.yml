@@ -18,9 +18,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        # while at this time 3.9 is still in security support,
-        # it won't be soon. Let's cut that off here.
-        python-version: ["3.10", "3.11", "3.12", "3.13"]
+        python-version: ["3.10", "3.11", "3.12", "3.13", "3.14"]
     steps:
       - uses: actions/checkout@v5
         with:
