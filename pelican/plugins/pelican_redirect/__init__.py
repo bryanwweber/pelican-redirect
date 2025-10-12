@@ -2,8 +2,9 @@ import logging
 from dataclasses import dataclass
 from functools import cached_property
 
-from pelican import contents, signals
 from pelican.generators import ArticlesGenerator, CachingGenerator, PagesGenerator
+
+from pelican import contents, signals
 
 logger = logging.getLogger(__name__)
 
