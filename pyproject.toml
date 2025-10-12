@@ -4,7 +4,7 @@ authors = [
   { name = "Chris Rose", email = "offline@offby1.net" },
 ]
 classifiers = [
-  "Development Status :: 4 - Beta",
+  "Development Status :: 5 - Production/Stable",
   "Environment :: Console",
   "Framework :: Pelican :: Plugins",
   "Framework :: Pelican",
@@ -16,6 +16,7 @@ classifiers = [
   "Programming Language :: Python :: 3.11",
   "Programming Language :: Python :: 3.12",
   "Programming Language :: Python :: 3.13",
+  "Programming Language :: Python :: 3.14",
   "Topic :: Internet :: WWW/HTTP",
   "Topic :: Software Development :: Libraries :: Python Modules",
 ]
@@ -26,7 +27,7 @@ keywords = ["html", "http-equiv", "pelican", "plugin", "redirect"]
 license = { text = "BSD-3-Clause" }
 name = "pelican-redirect"
 readme = "README.md"
-requires-python = ">=3.9.0,<4.0"
+requires-python = ">=3.10.0,<4.0"
 
 [project.urls]
 Documentation = "https://docs.getpelican.com"
