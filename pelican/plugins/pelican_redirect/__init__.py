@@ -13,15 +13,15 @@ TEMPLATE = """\
 <html>
 
 <head>
-    <link rel="canonical" href="/{{ page.save_as }}" />
+    <link rel="canonical" href="/{{ page.url }}" />
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-    <meta http-equiv="refresh" content="0;url=/{{ page.save_as }}" />
+    <meta http-equiv="refresh" content="0;url=/{{ page.url }}" />
     <meta name="pelican-redirect-plugin-version" content="{{ version }}" />
 </head>
 
 <body>
 <p>This content has moved. If you are not redirected, please click here:</p>
-<p><a href="/{{ page.save_as }}">{{ page.save_as }}</a></p>
+<p><a href="/{{ page.url }}">{{ page.url }}</a></p>
 </body>
 
 </html>
