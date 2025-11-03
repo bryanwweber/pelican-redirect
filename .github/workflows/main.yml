@@ -37,11 +37,11 @@ jobs:
         with:
           persist-credentials: false
       - name: Validate links in Markdown files
-        uses: JustinBeckwith/linkinator-action@cf305c16947ba91077d8a51fa2cbe155cd60f455 # v2.1
+        uses: JustinBeckwith/linkinator-action@af984b9f30f63e796ae2ea5be5e07cb587f1bbd9 # v2.3
         with:
           retry: true
       - name: Install mise
-        uses: jdx/mise-action@e3d7b8d67a7958d1207f6ed871e83b1ea780e7b0 # v3.3.1
+        uses: jdx/mise-action@be3be2260bc02bc3fbf94c5e2fed8b7964baf074 # v3.4.0
         with:
           install: true
           cache: true
