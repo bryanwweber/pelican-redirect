@@ -20,7 +20,7 @@ jobs:
       matrix:
         python-version: ["3.10", "3.11", "3.12", "3.13", "3.14"]
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v6.0.0
         with:
           persist-credentials: false
       - name: Install uv
@@ -33,7 +33,7 @@ jobs:
     name: Lint
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v6.0.0
         with:
           persist-credentials: false
       - name: Validate links in Markdown files
@@ -41,7 +41,7 @@ jobs:
         with:
           retry: true
       - name: Install mise
-        uses: jdx/mise-action@d16887ba50704baed7de72bd1e82e04391e4457a # v3.5.0
+        uses: jdx/mise-action@146a28175021df8ca24f8ee1828cc2a60f980bd5 # v3.5.1
         with:
           install: true
           cache: true
