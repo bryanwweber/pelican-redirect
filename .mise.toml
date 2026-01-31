@@ -10,8 +10,8 @@ format = { depends = ["ruff-format", "taplo-format", "yamlfmt-format"] }
 lint = { depends = ["ruff-lint", "taplo-lint", "yamlfmt-lint", "zizmor-lint"] }
 ruff-format = { tools = { uv = "latest" }, run = "uv run ruff format . && uv run ruff check --fix ." }
 ruff-lint = { tools = { uv = "latest" }, run = "uv run ruff format --check . && uv run ruff check ." }
-taplo-format = { tools = { "taplo-cli" = "latest" }, run = "taplo format" }
-taplo-lint = { tools = { "taplo-cli" = "latest" }, run = "taplo format --check && taplo lint" }
+taplo-format = { tools = { "taplo" = "latest" }, run = "taplo format" }
+taplo-lint = { tools = { "taplo" = "latest" }, run = "taplo format --check && taplo lint" }
 test = { tools = { uv = "latest" }, run = "uv run pytest" }
 yamlfmt-format = { tools = { "yamlfmt" = "latest" }, run = "yamlfmt -quiet ." }
 yamlfmt-lint = { tools = { "yamlfmt" = "latest" }, run = "yamlfmt -lint -quiet ." }
